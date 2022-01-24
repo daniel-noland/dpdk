@@ -32,7 +32,7 @@ if host_machine.system() == 'windows'
     endif
     pmdinfogen += 'coff'
 else
-    pmdinfo += 'ar'
+    pmdinfo += 'llvm-ar'
     pmdinfogen += 'elf'
 endif
 

@@ -406,10 +406,10 @@ if is_windows
 endif
 
 if get_option('b_lto')
-    if cc.has_argument('-ffat-lto-objects')
-        add_project_arguments('-ffat-lto-objects', language: 'c')
+    if cc.has_argument('-flto')
+        add_project_arguments('-flto=thin', language: 'c')
     else
-        error('compiler does not support fat LTO objects - please turn LTO off')
+        error('compiler does not support thin LTO - please turn LTO off')
     endif
     # workaround for gcc bug 81440
     if cc.get_id() == 'gcc' and cc.version().version_compare('<8.0')

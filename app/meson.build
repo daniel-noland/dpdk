@@ -21,7 +21,7 @@ apps = [
 ]
 
 default_cflags = machine_args + ['-DALLOW_EXPERIMENTAL_API']
-default_ldflags = []
+default_ldflags = ['-Wl,-O2', '-Wl,--as-needed', '-Wl,-z,relro,-z,now', '-fuse-ld=lld', '-Wl,--thinlto-jobs=6']
 if get_option('default_library') == 'static' and not is_windows
     default_ldflags += ['-Wl,--export-dynamic']
 endif

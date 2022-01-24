@@ -6,6 +6,7 @@
 import argparse
 import ctypes
 import json
+import subprocess
 import sys
 import tempfile
 
@@ -265,7 +266,8 @@ def main():
     output = open_output(args.output)
     write_header(output)
     for path in args.input:
-        image = load_image(args.format, path)
+        subprocess.check_call(["llc", path, "-filetype=obj", "-o", f"{path}.obj"])
+        image = load_image(args.format, f"{path}.obj")
         drivers = load_drivers(image)
         dump_drivers(drivers, output)
 
